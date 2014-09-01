@@ -17,6 +17,15 @@ public abstract class BaseAi : MonoBehaviour {
 				Debug.Log(this.name + " needs a ship script assigned");
 		}
 
+		if (visionCollider == null) 
+		{
+			visionCollider = this.GetComponent<SphereCollider>();
+			if( visionCollider != null)
+				visionCollider.radius = visionDist;
+			else
+				Debug.Log("Ship " + this.name + " needs a vision sphere assigned");
+		}
+
 		if( visionCollider != null)
 			visionCollider.radius = visionDist;
 		else
@@ -26,6 +35,13 @@ public abstract class BaseAi : MonoBehaviour {
 		{
 			this.gameObject.layer = 12;
 		}
+
+		StartBehavior ();
+	}
+
+	public virtual void StartBehavior()
+	{
+
 	}
 
 	public virtual void AIUpdate()
