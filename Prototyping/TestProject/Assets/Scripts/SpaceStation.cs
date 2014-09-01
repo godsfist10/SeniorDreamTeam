@@ -13,7 +13,7 @@ public class SpaceStation : MonoBehaviour {
 
 		for( int i = 0; i < m_FriendlyShipList.Count; i++)
 		{
-			if( m_FriendlyShipList[i].GetComponentInChildren<PlayerShipController>().enabled)
+			if( m_FriendlyShipList[i].GetComponentInChildren<FriendlyControllerManager>().playerControl)
 			{
 				SetCurrentPlayerShip(i);
 			}
@@ -75,7 +75,6 @@ public class SpaceStation : MonoBehaviour {
 			{
 				tempCurrentShip = 0;
 			}
-			Debug.Log ("swap up");
 			swapShipControls( tempCurrentShip);
 		}
 		else if( Input.GetKeyDown(KeyCode.Q))
@@ -85,22 +84,15 @@ public class SpaceStation : MonoBehaviour {
 			{
 				tempCurrentShip = m_FriendlyShipList.Count - 1;
 			}
-			Debug.Log("swap down");
 			swapShipControls( tempCurrentShip);
 		}
 	}
 
 	public void swapShipControls(int swapTo)
 	{
-		Debug.Log ("from: " + m_CurrentShipIndex + "  to:  " + swapTo);
-		GameObject swapToShip = m_FriendlyShipList [swapTo];
-		GameObject currentShipSwap = m_FriendlyShipList [m_CurrentShipIndex];
 
-		currentShipSwap.GetComponentInChildren<Camera> ().enabled = false;
-		swapToShip.GetComponentInChildren<Camera> ().enabled = true;
-
-		currentShipSwap.GetComponentInChildren<PlayerShipController> ().enabled = false;
-		swapToShip.GetComponentInChildren<PlayerShipController> ().enabled = true;
+		m_FriendlyShipList [swapTo].GetComponentInChildren<FriendlyControllerManager> ().PlayerControl (true);
+		m_FriendlyShipList [m_CurrentShipIndex].GetComponentInChildren<FriendlyControllerManager> ().PlayerControl (false);
 
 		m_CurrentShipIndex = swapTo;
 

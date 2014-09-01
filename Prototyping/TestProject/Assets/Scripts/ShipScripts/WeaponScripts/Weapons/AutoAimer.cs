@@ -2,10 +2,13 @@
 using System.Collections;
 using System.Collections.Generic;
 
+[RequireComponent (typeof(SphereCollider))]
+
 public class AutoAimer : MonoBehaviour 
 {
-	public List<GameObject> m_WeaponsToAim = null;
-	public GameObject m_CurrentTarget = null;
+	[SerializeField] protected float AutoAimRange = 50;
+	[SerializeField] protected List<GameObject> m_WeaponsToAim = null;
+	protected GameObject m_CurrentTarget = null;
 
 	void Start()
 	{
@@ -14,6 +17,7 @@ public class AutoAimer : MonoBehaviour
 		{
 			m_WeaponsToAim.Add(weapon.gameObject);
 		}
+		GetComponent<SphereCollider> ().radius = AutoAimRange;
 	}
 
 	public void setTarget(GameObject target)

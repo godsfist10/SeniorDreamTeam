@@ -49,6 +49,8 @@
      <Compile Include="Assets\Scripts\AiShipControllers\AiCircleShip.cs" />
      <Compile Include="Assets\Scripts\AiShipControllers\BaseAi.cs" />
      <Compile Include="Assets\Scripts\AiShipControllers\HomingAi.cs" />
+     <Compile Include="Assets\Scripts\ControllerManagers\BaseAiManager.cs" />
+     <Compile Include="Assets\Scripts\ControllerManagers\FriendlyControllerManager.cs" />
      <Compile Include="Assets\Scripts\OldScripts\FlightTest2.cs" />
      <Compile Include="Assets\Scripts\PlayerShipController.cs" />
      <Compile Include="Assets\Scripts\ShipScripts\BaseScripts\BaseEngine.cs" />

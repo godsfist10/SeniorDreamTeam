@@ -18,7 +18,7 @@ public class PlayerShipController : MonoBehaviour {
 			this.gameObject.layer = 12;
 	}
 
-	void Update ()
+	public void PlayerControllerUpdate ()
 	{
 		if (Input.GetKey (KeyCode.W)) 
 		{
@@ -50,6 +50,5 @@ public class PlayerShipController : MonoBehaviour {
 		pitch = Input.GetAxis("Pitch") * (Time.fixedDeltaTime);
 		yaw = Input.GetAxis("Yaw") * (Time.fixedDeltaTime);
 		m_Ship.controlRotation (roll, pitch, yaw);
-
 	}
 }

@@ -13,8 +13,9 @@ public class HomingAi : BaseAi {
 	}
 	
 	// Update is called once per frame
-	public override void AIUpdate()
+	public override void ActiveAIUpdate()
 	{
+		this.transform.root.transform.LookAt (m_Target.transform);
 		m_Ship.Accelerate();
 	}
 }

@@ -8,7 +8,7 @@ public class AiCircleShip : BaseAi {
 	[SerializeField] private float yaw = 0.0f;
 	
 	// Update is called once per frame
-	public override void AIUpdate()
+	public override void ActiveAIUpdate()
 	{
 		m_Ship.Accelerate();
 		m_Ship.controlRotation (roll, pitch, yaw);

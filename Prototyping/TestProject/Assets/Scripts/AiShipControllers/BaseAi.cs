@@ -5,14 +5,13 @@ public abstract class BaseAi : MonoBehaviour {
 
 	// Use this for initialization
 	[SerializeField] protected float visionDist = 0;
-
 	[SerializeField] protected BaseShip m_Ship;
 	[SerializeField] protected SphereCollider visionCollider = null;
 	public virtual void Start () 
 	{
 		if( m_Ship == null)
 		{
-			m_Ship = this.transform.root.gameObject.GetComponentInChildren<BaseShip>();
+			m_Ship = this.transform.root.GetComponentInChildren<BaseShip>();
 			if( m_Ship == null)
 				Debug.Log(this.name + " needs a ship script assigned");
 		}
@@ -39,24 +38,26 @@ public abstract class BaseAi : MonoBehaviour {
 		StartBehavior ();
 	}
 
-	public virtual void StartBehavior()
-	{
+	public virtual void StartBehavior(){}
 
-	}
+	public virtual void ActiveAIUpdate(){}
 
-	public virtual void AIUpdate()
-	{
+	//public virtual void InactiveAIUpdate(){}
 
-	}
+	public virtual void AIUpdate(){}
 
-	public virtual void EnteredVisionSphere(Collider collider)
-	{
+	public virtual void EnteredVisionSphere(Collider collider){}
 
-	}
+	public virtual void ExitVisionSphere(Collider collider){}
 
-	public virtual void OnTriggerEnter(Collider collider)
+	public void OnTriggerEnter(Collider collider)
 	{
 		EnteredVisionSphere(collider);
+	}
+
+	public void OnTriggerExit(Collider collider)
+	{
+		ExitVisionSphere (collider);
 	}
 
 	public void Update () 
