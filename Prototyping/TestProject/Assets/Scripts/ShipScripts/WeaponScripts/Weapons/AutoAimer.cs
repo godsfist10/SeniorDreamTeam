@@ -63,7 +63,6 @@ public class AutoAimer : MonoBehaviour
 
 	public virtual void OnTriggerEnter(Collider collider)
 	{
-
 		if( this.transform.root.gameObject.layer == 8)
 		{
 			if( collider.gameObject.layer == 9)
