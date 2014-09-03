@@ -114,7 +114,6 @@ public class BaseShip : MonoBehaviour {
 		if( m_CurrentSpeed > m_Hull.m_Engine.m_MaxSpeed)
 		{
 			m_CurrentSpeed -= m_Hull.getAcceleration() * Time.deltaTime * m_Hull.m_Engine.m_BoostMultiplier;
-			Debug.Log("overMaxSpeed");
 		}
 
 		Vector3 AddPos2 = Vector3.forward;

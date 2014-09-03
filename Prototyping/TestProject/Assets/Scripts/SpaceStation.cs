@@ -6,6 +6,7 @@ public class SpaceStation : MonoBehaviour {
 
 	public List<GameObject> m_FriendlyShipList; 
 	public int m_CurrentShipIndex;
+	private int counter = 0;
 
 	void Start () 
 	{
@@ -21,6 +22,50 @@ public class SpaceStation : MonoBehaviour {
 		//listShips ();
 	}
 
+	public void Update()
+	{
+		/*counter++;
+
+		if( counter > 20)
+		{
+			CleanFriendlyShipList();
+			counter = 0;
+		}*/
+
+		swapShipUpdate();
+	}
+
+	protected void CleanFriendlyShipList()
+	{
+		for( int i = 0; i < m_FriendlyShipList.Count; i++)
+		{
+			if( m_FriendlyShipList[i] == null)
+			{
+				Debug.Log("cleared index " + i); 
+				m_FriendlyShipList.RemoveAt(i);
+			}
+		}
+	}
+
+	public void IDed(GameObject soonToBeDead)
+	{
+		int tempIndex = 0;
+		if( soonToBeDead.GetComponentInChildren<FriendlyControllerManager>().playerControl)
+		{
+			swapForwardNextShip();
+		}
+		for( int i = 0; i < m_FriendlyShipList.Count; i++)
+		{
+			if( soonToBeDead == m_FriendlyShipList[i])
+				tempIndex = i;
+		}
+
+		m_FriendlyShipList.Remove(soonToBeDead);
+
+		if( m_CurrentShipIndex > tempIndex)  //if an object is removed that has an index lower than current index then the current needs to be offset
+			m_CurrentShipIndex--;
+	}
+	
 	public void SetCurrentPlayerShip(GameObject currentShip)
 	{
 		int tempCurrent = -1;
@@ -51,7 +96,7 @@ public class SpaceStation : MonoBehaviour {
 	{
 		for( int i = 0; i < m_FriendlyShipList.Count; i++)
 		{
-			Debug.Log( m_FriendlyShipList[i].name);
+			Debug.Log ( m_FriendlyShipList[i].name);
 		}
 	}
 
@@ -60,38 +105,66 @@ public class SpaceStation : MonoBehaviour {
 		m_FriendlyShipList.Add (friendly);
 	}
 
-	// Update is called once per frame
-	void Update () 
+	public void swapShipUpdate()
 	{
-		swapShipFunction ();
+		if( m_FriendlyShipList.Count > 1)
+		{
+			if( Input.GetKeyDown(KeyCode.E))
+			{
+				swapForwardNextShip();
+			}
+			else if( Input.GetKeyDown(KeyCode.Q))
+			{
+				swapBackwardNextShip();
+			}
+		}
 	}
 
-	public void swapShipFunction()
+	protected void swapForwardNextShip()
 	{
-		if( Input.GetKeyDown(KeyCode.E))
+		int tempCurrentShip = m_CurrentShipIndex + 1;
+		if( tempCurrentShip >= m_FriendlyShipList.Count)
 		{
-			int tempCurrentShip = m_CurrentShipIndex + 1;
-			if( tempCurrentShip >= m_FriendlyShipList.Count)
-			{
-				tempCurrentShip = 0;
-			}
-			swapShipControls( tempCurrentShip);
+			tempCurrentShip = 0;
 		}
-		else if( Input.GetKeyDown(KeyCode.Q))
-		{
-			int tempCurrentShip = m_CurrentShipIndex - 1;
-			if( tempCurrentShip < 0)
-			{
-				tempCurrentShip = m_FriendlyShipList.Count - 1;
-			}
+		if( m_FriendlyShipList[tempCurrentShip].gameObject != null)
 			swapShipControls( tempCurrentShip);
+		else
+			Debug.Log ("trying to swap forward to null index of " + tempCurrentShip);
+	}
+
+	protected void swapBackwardNextShip()
+	{
+		int tempCurrentShip = m_CurrentShipIndex - 1;
+		if( tempCurrentShip < 0)
+		{
+			tempCurrentShip = m_FriendlyShipList.Count - 1;
+		}
+		if( m_FriendlyShipList[tempCurrentShip].gameObject != null)
+			swapShipControls( tempCurrentShip);
+		else
+			Debug.Log ("trying to swap backward to null index of " + tempCurrentShip);
+	}
+
+	public void shipPlayerControl(int index)
+	{
+		if( m_FriendlyShipList[index] != null)
+		{
+			m_FriendlyShipList [index].GetComponentInChildren<FriendlyControllerManager> ().PlayerControl (true);
+		}
+		else
+		{
+			Debug.Log("cant swap to that its null");
 		}
 	}
 
 	public void swapShipControls(int swapTo)
 	{
-
+		Debug.Log("swap to: " + swapTo);
+		if( m_FriendlyShipList [swapTo] != null)
 		m_FriendlyShipList [swapTo].GetComponentInChildren<FriendlyControllerManager> ().PlayerControl (true);
+
+		if( m_FriendlyShipList [m_CurrentShipIndex] != null)
 		m_FriendlyShipList [m_CurrentShipIndex].GetComponentInChildren<FriendlyControllerManager> ().PlayerControl (false);
 
 		m_CurrentShipIndex = swapTo;

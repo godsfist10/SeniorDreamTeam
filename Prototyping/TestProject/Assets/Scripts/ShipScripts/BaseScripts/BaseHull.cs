@@ -4,13 +4,14 @@ using System.Collections;
 public class BaseHull : MonoBehaviour {
 
 	public BaseEngine m_Engine;
-	private float m_Health;
+	protected float m_Health;
 	public float m_MaxHealth;
-	private float m_Shields;
+	protected float m_Shields;
 	public float m_MaxShields;
 	public float m_Weight;
 	public float m_ArmorFactor = 1;  // above 1 increases defence and below 1 reduces it 
-	private float m_armorDamageMultiplier;
+	protected float m_armorDamageMultiplier;
+	protected bool m_Destroyed = false;
 
 	public virtual void Start()
 	{
@@ -71,18 +72,26 @@ public class BaseHull : MonoBehaviour {
 			m_Health -= damage;
 		}
 
-		if (m_Health <= 0)
+		if (m_Health <= 0 && !m_Destroyed)
 		{
+			m_Destroyed = true;
 			destroyed();
 		}
 	}
 
 	public virtual void destroyed()
 	{
+		if( this.transform.root.gameObject.tag == "FriendlyShip")
+		{
+			GameObject.FindGameObjectWithTag("SpaceStation").GetComponent<SpaceStation>().IDed(this.transform.root.gameObject);
+		}
+
 		if( this.gameObject.transform.root != null)
+		{
+			Debug.Log ("dying");
 			Destroy(this.gameObject.transform.root.gameObject);
-		else
-			Destroy(this.gameObject);
+		}
+
 	}
 
 	public virtual float getAcceleration()
