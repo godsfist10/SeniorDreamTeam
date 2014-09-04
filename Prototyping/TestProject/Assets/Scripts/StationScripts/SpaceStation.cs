@@ -6,7 +6,6 @@ public class SpaceStation : MonoBehaviour {
 
 	public List<GameObject> m_FriendlyShipList; 
 	public int m_CurrentShipIndex;
-	private int counter = 0;
 
 	void Start () 
 	{
@@ -160,7 +159,6 @@ public class SpaceStation : MonoBehaviour {
 
 	public void swapShipControls(int swapTo)
 	{
-		Debug.Log("swap to: " + swapTo);
 		if( m_FriendlyShipList [swapTo] != null)
 		m_FriendlyShipList [swapTo].GetComponentInChildren<FriendlyControllerManager> ().PlayerControl (true);
 

@@ -9,8 +9,15 @@ public class BasicBullet : BaseProjectile {
 
 	public virtual void Start () 
 	{
+		//Vector3 forwardDir = rigidbody.rotation * Vector3.forward;
+		//rigidbody.velocity = forwardDir * m_Speed;
+	}
+
+	public override void init(float range, float damage, float initVelocity)
+	{
 		Vector3 forwardDir = rigidbody.rotation * Vector3.forward;
-		rigidbody.velocity = forwardDir * m_Speed;
+		rigidbody.velocity = forwardDir * (m_Speed + initVelocity);
+		base.init(range, damage, initVelocity);
 	}
 
 	// Update is called once per frame

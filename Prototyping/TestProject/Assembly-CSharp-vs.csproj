@@ -51,8 +51,8 @@
      <Compile Include="Assets\Scripts\AiShipControllers\HomingAi.cs" />
      <Compile Include="Assets\Scripts\ControllerManagers\BaseAiManager.cs" />
      <Compile Include="Assets\Scripts\ControllerManagers\FriendlyControllerManager.cs" />
+     <Compile Include="Assets\Scripts\ControllerManagers\PlayerShipController.cs" />
      <Compile Include="Assets\Scripts\OldScripts\FlightTest2.cs" />
-     <Compile Include="Assets\Scripts\PlayerShipController.cs" />
      <Compile Include="Assets\Scripts\ShipScripts\BaseScripts\BaseEngine.cs" />
      <Compile Include="Assets\Scripts\ShipScripts\BaseScripts\BaseHull.cs" />
      <Compile Include="Assets\Scripts\ShipScripts\BaseScripts\BaseShip.cs" />
@@ -64,7 +64,9 @@
      <Compile Include="Assets\Scripts\ShipScripts\WeaponScripts\Weapons\BaseWeapon.cs" />
      <Compile Include="Assets\Scripts\ShipScripts\WeaponScripts\Weapons\MachineGun.cs" />
      <Compile Include="Assets\Scripts\ShipScripts\WeaponScripts\Weapons\MultiMachineGun.cs" />
-     <Compile Include="Assets\Scripts\SpaceStation.cs" />
+     <Compile Include="Assets\Scripts\StationScripts\BaseWaveScript.cs" />
+     <Compile Include="Assets\Scripts\StationScripts\SpaceStation.cs" />
+     <Compile Include="Assets\Scripts\StationScripts\WaveScript.cs" />
      <None Include="Assets\Standard Assets\Particles\Sources\Shaders\Particle Alpha Blend (Queue +100).shader" />
      <None Include="Assets\Standard Assets\Skyboxes\_skybox info.txt" />
  <Reference Include="Assembly-UnityScript-firstpass">

@@ -88,7 +88,6 @@ public class BaseHull : MonoBehaviour {
 
 		if( this.gameObject.transform.root != null)
 		{
-			Debug.Log ("dying");
 			Destroy(this.gameObject.transform.root.gameObject);
 		}
 

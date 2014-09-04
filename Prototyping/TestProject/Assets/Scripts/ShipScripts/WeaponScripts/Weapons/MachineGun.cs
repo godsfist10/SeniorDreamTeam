@@ -20,7 +20,7 @@ public class MachineGun : BaseWeapon {
 	protected override void Fire()
 	{
 		GameObject temp = (GameObject)Instantiate(bullet, new Vector3(rigidbody.position.x, rigidbody.position.y, rigidbody.position.z), rigidbody.rotation);
-		temp.GetComponent<BaseProjectile>().init(m_Range, m_Damage);
+		temp.GetComponent<BaseProjectile>().init(m_Range, m_Damage, this.transform.root.rigidbody.velocity.magnitude);
 		if( this.gameObject.layer == 8)
 		{
 			temp.layer = 10;

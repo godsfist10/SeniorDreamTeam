@@ -9,7 +9,10 @@ public class HomingAi : BaseAi {
 	// Use this for initialization
 	public override void StartBehavior () 
 	{
-		this.transform.root.transform.LookAt (m_Target.transform);
+		if( m_Target == null)
+		{
+			m_Target = GameObject.FindGameObjectWithTag("SpaceStation");
+		}
 	}
 	
 	// Update is called once per frame
