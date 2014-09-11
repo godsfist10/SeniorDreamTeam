@@ -3,7 +3,8 @@ using System.Collections;
 
 public class PlayerShipController : MonoBehaviour {
 	
-	[SerializeField] private BaseShip m_Ship;
+	[SerializeField] protected BaseShip m_Ship;
+	[SerializeField] protected GameObject m_TurretPrefab;
 
 	void Start()
 	{
@@ -41,6 +42,11 @@ public class PlayerShipController : MonoBehaviour {
 		if(Input.GetMouseButton(0))
 		{
 			m_Ship.FireWeapon();
+		}
+
+		if(Input.GetKeyDown(KeyCode.R))
+		{
+			Instantiate(m_TurretPrefab, m_Ship.transform.position, Quaternion.identity);
 		}
 
 		float roll = 0;
