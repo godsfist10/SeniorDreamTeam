@@ -51,7 +51,7 @@ public class PlayerMover : MonoBehaviour {
 				int layerMask = 1 << 8;
 				if( Physics.Raycast(ray, out hit, hitDistance, layerMask))
 				{
-					Debug.DrawRay( eyes.transform.position, eyes.transform.forward * hitDistance, Color.white);
+					//Debug.DrawRay( eyes.transform.position, eyes.transform.forward * hitDistance, Color.white);
 					hit.rigidbody.AddForceAtPosition(eyes.transform.forward * pushForce ,hit.point,ForceMode.Impulse);
 				}
 			}
@@ -115,7 +115,7 @@ public class PlayerMover : MonoBehaviour {
 		Vector3 tempVel = Vector3.zero;
 		tempVel += eyes.transform.right * Input.GetAxis("Mouse X") * whipForce;
 		tempVel += eyes.transform.up * Input.GetAxis("Mouse Y") * whipForce;
-		Debug.Log(tempVel);
+		//Debug.Log(tempVel);
 		if( tempVel.magnitude > maxWhipForce)
 			tempVel = tempVel.normalized * maxWhipForce;
 		m_holdingObject.rigidbody.AddForce (tempVel, ForceMode.VelocityChange);
