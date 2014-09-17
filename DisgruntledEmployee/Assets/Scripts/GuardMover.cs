@@ -40,10 +40,11 @@ public class GuardMover : MonoBehaviour {
 					m_GrumpyGuard = false;
 				}
 			}
-			if( m_REALLYGRUMPYGUARD)
-			{
-				m_NavAgent.SetDestination(m_Player.transform.position);
-			}
+
+		}
+		if( m_REALLYGRUMPYGUARD)
+		{
+			m_NavAgent.SetDestination(m_Player.transform.position);
 		}
 
 	}
@@ -53,12 +54,26 @@ public class GuardMover : MonoBehaviour {
 		Debug.Log("grumpy");
 		if( !m_GrumpyGuard && !m_REALLYGRUMPYGUARD)
 		{
+			RaycastHit hit;
+			int tlayerMask = 1 << 9;
+			tlayerMask = ~tlayerMask;
+			transform.LookAt(m_Player.transform.position);
+			Ray ray = new Ray( new Vector3( transform.position.x, (transform.position.y + ((this.GetComponent<MeshRenderer>().bounds.size.y / 2)*.75f)), transform.position.z), transform.forward);
+			Debug.DrawRay( new Vector3( transform.position.x, (transform.position.y + ((this.GetComponent<MeshRenderer>().bounds.size.y / 2)*.75f)), transform.position.z), transform.forward * 50, Color.black, 1000);
+			if( Physics.Raycast( ray, out hit, 50, tlayerMask ))
+			{
+
+				if( hit.transform.tag == "Player")
+				{
+					Debug.Log ("hit " + hit.transform.tag);
+					m_REALLYGRUMPYGUARD = true;
+
+				}
+			}
 			m_GrumpyGuard = true;
 			m_NavAgent.SetDestination(pos);
 		}
 	}
-
-
 
 
 
